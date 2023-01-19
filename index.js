@@ -1,13 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv").config();
 const cors = require("cors");
 const { connection } = require("./Config/db");
+const { signupController } = require("./Routes/Signup.Route")
 
 const app = express()
 app.use(express.json());
-app.use(cors())
 
+require("dotenv").config();
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, async () => {
@@ -20,3 +19,6 @@ app.listen(PORT, async () => {
     }
     console.log(`listening on Port :  ${PORT}`);
 });
+
+app.use(cors())
+app.use("/user", signupController);
