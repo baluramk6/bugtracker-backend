@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const { connection } = require("./Config/db");
-const { signupController } = require("./Routes/Signup.Route")
+const { signupController } = require("./Routes/Signup.Route");
+const { signinController } = require("./Routes/Signin.Route");
+const { authentication } = require("./Middleware/authentication");
 
 const app = express()
 app.use(express.json());
@@ -22,3 +24,5 @@ app.listen(PORT, async () => {
 
 app.use(cors())
 app.use("/user", signupController);
+app.use("/user", signinController);
+app.use(authentication)
